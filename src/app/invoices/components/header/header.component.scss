@@ -1,0 +1,168 @@
+@import "../../../../assets/scss/vars";
+@import "../../../../assets/scss/mq";
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  animation: fadeIn 1s ease-in-out;
+  max-width: 46rem;
+}
+
+.header-title {
+  h2 {
+    font-size: 1.25rem;
+    letter-spacing: -1px;
+    margin-bottom: 2px;
+
+    @include mq(xs) {
+      font-size: 2rem;
+    }
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: var(--btn-text);
+    letter-spacing: -0.5px;
+  }
+}
+
+.header-filter--dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.header-btn--filter {
+  margin-right: 1rem;
+  cursor: pointer;
+
+  .header-btn-text {
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-right: 1rem;
+    letter-spacing: -0.5px;
+  }
+
+  .filter-icon-arrow {
+    transform: rotateZ(0);
+    transition: transform 0.25s ease-in-out;
+
+    &.activeFilter {
+      transform: rotateZ(-180deg);
+    }
+  }
+}
+
+.header-btn--new {
+  background: var(--dark-purple);
+  color: #fff;
+  padding: 0.5rem 0.5rem;
+  padding-right: 1rem;
+  border-radius: 1.75rem;
+  cursor: pointer;
+  transition: background 0.25s ease;
+
+  @include mq(xs) {
+    margin-left: 1.5rem;
+  }
+
+  .wrap-icon-plus {
+    $width: 30px;
+    background: #fff;
+    display: inline-block;
+    border-radius: 50%;
+    width: $width;
+    height: $width;
+    line-height: $width;
+
+    img {
+      vertical-align: middle;
+    }
+  }
+
+  .header-btn-text {
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+  }
+
+  &:hover {
+    background: $light-purple;
+  }
+}
+
+.header-text-hide {
+  display: none;
+  margin: 0;
+
+  @include mq(xs) {
+    display: inline-block;
+  }
+}
+
+.dropdown {
+  background: var(--dropdown-bg);
+  position: absolute;
+  left: 50%;
+  top: 3rem;
+  box-shadow: 0px 10px 20px var(--dropdown-shadow);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  min-width: 12rem;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  li {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .filter-checkbox,
+  .filter-text {
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
+
+  .filter-checkbox {
+    background: var(--dropdown-checkbox);
+    width: 15px;
+    height: 15px;
+    margin-right: 1rem;
+    position: relative;
+
+    &:after {
+      content: "";
+      display: block;
+      background: url(../../../../assets/img/icon-check.svg) no-repeat center;
+      background-size: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+    }
+
+    &.active-filter {
+      background: var(--dark-purple);
+
+      &.filter-checkbox:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  .label-text {
+    line-height: 1;
+  }
+}
