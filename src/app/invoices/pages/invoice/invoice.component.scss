@@ -1,0 +1,328 @@
+@import "../../../../assets/scss/mq";
+
+.invoice {
+  animation: fadeIn 1s ease-in-out;
+  max-width: 45.5rem;
+  margin: 0 auto;
+
+  @include mq(md) {
+    padding: 0 2rem;
+  }
+}
+
+.invoice-back {
+  margin-bottom: 2rem;
+
+  .go-back {
+    cursor: pointer;
+
+    span {
+      display: inline-block;
+      font-size: 0.75rem;
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+.invoice-status-card,
+.invoice-wrap {
+  background: var(--invoice-bg);
+  box-shadow: rgb(72 84 159 / 10%) 0px 10px 10px -10px;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  padding: 1.5rem;
+}
+
+.invoice-status-card {
+  margin-bottom: 1rem;
+
+  @include mq(md) {
+    margin-bottom: 1.75rem;
+  }
+
+  .flex-between {
+    width: 100%;
+
+    @include mq(sm) {
+      width: auto;
+    }
+  }
+
+  p {
+    color: var(--btn-text);
+    margin-right: 1rem;
+  }
+}
+
+.invoice-wrap {
+  margin-bottom: 2rem;
+
+  @include mq(md) {
+    margin-bottom: 0;
+  }
+}
+
+.invoice-header {
+  margin-bottom: 2.5rem;
+
+  @include mq(md) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--left {
+    width: 100%;
+    margin-bottom: 2.5rem;
+
+    @include mq(md) {
+      width: auto;
+    }
+
+    p {
+      color: var(--btn-text);
+    }
+
+    span {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+
+      @include mq(md) {
+        font-size: 1rem;
+      }
+
+      &:before {
+        content: "#";
+        color: hsl(231, 37%, 63%);
+      }
+
+      p {
+        color: var(--btn-text);
+      }
+    }
+  }
+
+  &--right {
+    font-style: normal;
+    text-align: left;
+
+    @include mq(md) {
+      text-align: right;
+    }
+
+    p {
+      color: var(--btn-text);
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+
+.invoice-body {
+  align-items: flex-start;
+
+  @include mq(md) {
+    margin-bottom: 1.5rem;
+  }
+
+  .date-wrap,
+  .bill-to,
+  .send-to {
+    span {
+      color: var(--btn-text);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  .date-wrap {
+    width: 50%;
+
+    @include mq(md) {
+      width: 33%;
+    }
+  }
+
+  .date {
+    margin-bottom: 2.5rem;
+
+    p {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+  }
+
+  .bill-to {
+    width: 50%;
+
+    @include mq(md) {
+      width: 33%;
+    }
+
+    h2 {
+      margin: 0.75rem 0 0.5rem;
+      font-size: 0.95rem;
+    }
+    p {
+      color: var(--btn-text);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+  }
+
+  .send-to {
+    margin-bottom: 2.5rem;
+
+    @include mq(md) {
+      width: 33%;
+    }
+
+    p {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+  }
+}
+
+.invoice-table {
+  background: var(--table-bg);
+  border-radius: 0.4rem;
+  padding: 1rem;
+
+  table {
+    width: 100%;
+    text-align: left;
+
+    td,
+    th {
+      padding: 1rem;
+    }
+
+    th {
+      color: var(--btn-text);
+      font-size: 0.75rem;
+      font-weight: 400;
+    }
+
+    th:nth-child(1) {
+      width: 50%;
+      @include mq(xs) {
+        width: 35%;
+      }
+    }
+    th:nth-child(2) {
+      display: none;
+      width: 15%;
+      @include mq(xs) {
+        display: table-cell;
+      }
+    }
+    th:nth-child(3) {
+      display: none;
+      width: 25%;
+      @include mq(xs) {
+        display: table-cell;
+      }
+    }
+    th:nth-child(4) {
+      width: 50%;
+      @include mq(xs) {
+        width: 25%;
+      }
+    }
+
+    td {
+      font-weight: 700;
+    }
+
+    td:nth-child(2),
+    td:nth-child(3) {
+      color: var(--btn-text);
+      display: none;
+      @include mq(xs) {
+        display: table-cell;
+      }
+    }
+  }
+}
+
+.invoice-total {
+  background: var(--total-amout-bg);
+  border-radius: 0 0 0.5rem 0.5rem;
+  color: #fff;
+  font-weight: 700;
+  padding: 2rem;
+
+  &-amout {
+    font-size: 1.25rem;
+  }
+}
+
+.invoice-actions {
+  background: var(--actions-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem .75em;
+  text-align: right;
+  width: calc(100% + 3rem);
+  position: relative;
+  bottom: -2rem;
+  left: -1.5rem;
+
+  @include mq(xs) {
+    padding: 1.5rem;
+  }
+
+  .btn {
+    margin-left: 0.5rem;
+  }
+
+  &.top {
+    display: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    bottom: 0;
+    left: auto;
+
+    @include mq(sm) {
+      display: inline-flex;
+    }
+  }
+
+  &.bottom {
+    @include mq(sm) {
+      display: none;
+    }
+  }
+}
+
+.btn-paid {
+  background: var(--dark-purple);
+  color: #fff;
+  margin-left: 0.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.modal-invoice-delete {
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    color: var(--btn-text);
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .invoice-actions {
+    bottom: auto;
+    padding: 0;
+    margin: 0;
+    position: initial;
+    width: 100%;
+  }
+}
