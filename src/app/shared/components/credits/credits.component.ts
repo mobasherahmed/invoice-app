@@ -15,11 +15,6 @@ export class CreditsComponent {
   animateClose: boolean = false;
 
   links = [
-    // {
-    //   path:
-    //     '',
-    //   name: 'Visit solution page',
-    // },
     {
       path: 'https://github.com/mobasherahmed/invoice-app',
       name: 'Visit git repo',
