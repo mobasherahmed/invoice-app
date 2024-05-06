@@ -11,6 +11,7 @@ import { ModalService } from '../../../shared/services/modal.service';
 import { UIService } from '../../../shared/services/ui.service';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-invoice',
@@ -25,6 +26,7 @@ export class InvoiceComponent implements OnInit, OnDestroy {
   refreshInvoices$!: Subscription;
   updateInvoices$!: Subscription;
   deleteInvoices$!: Subscription;
+  isAdmin: boolean = false;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -33,7 +35,8 @@ export class InvoiceComponent implements OnInit, OnDestroy {
     private router: Router,
     private uiService: UIService,
     private toastrService: ToastrService,
-    private titleService: Title
+    private titleService: Title,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +49,9 @@ export class InvoiceComponent implements OnInit, OnDestroy {
 
     this.refreshInvoices$ = this.invoiceService.refreshInvoices$
       .pipe(switchMap(() => this.invoiceService.getInvoice(this.invoice._id)))
-      .subscribe((invoice) => this.invoice = invoice)
+      .subscribe((invoice) => this.invoice = invoice);
+
+    this.isAdmin = this.authService.isAdmin();
   }
 
   markAsPaid(): void {
@@ -74,7 +79,7 @@ export class InvoiceComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.toastrService.success('Invoice deleted successfully')
         this.modalService.close();
-        this.router.navigate(['/']);
+        this.router.navigate(['/invoices']);
       })
   }
 

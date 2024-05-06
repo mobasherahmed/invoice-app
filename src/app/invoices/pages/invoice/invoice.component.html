@@ -1,6 +1,6 @@
 <section class="invoice" *ngIf="invoice">
   <div class="invoice-back">
-    <button class="go-back" routerLink="/">
+    <button class="go-back" routerLink="/invoices">
       <img src="./assets/img/icon-arrow-left.svg" alt="go back" />
       <span>Go back</span>
     </button>
@@ -17,8 +17,8 @@
       </span>
     </div>
     <div class="invoice-actions top">
-      <button class="btn" (click)="handleEdit()">Edit</button>
-      <button class="btn btn-delete" (click)="openModal()">Delete</button>
+      <button class="btn" (click)="handleEdit()" *ngIf="isAdmin">Edit</button>
+      <button class="btn btn-delete" (click)="openModal()" *ngIf="isAdmin">Delete</button>
       <button
         class="btn btn-paid"
         (click)="markAsPaid()"
@@ -99,8 +99,8 @@
   </div>
 
   <div class="invoice-actions bottom">
-    <button class="btn" (click)="handleEdit()">Edit</button>
-    <button class="btn btn-delete" (click)="openModal()">Delete</button>
+    <button class="btn" (click)="handleEdit()" *ngIf="isAdmin">Edit</button>
+    <button class="btn btn-delete" (click)="openModal()" *ngIf="isAdmin">Delete</button>
     <button
     class="btn btn-paid"
     (click)="markAsPaid()"
