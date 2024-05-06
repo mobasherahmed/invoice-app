@@ -2,7 +2,7 @@
   <div class="credits-mask" (click)="handleClose()"></div>
   <div class="credits-container">
     <img
-      src="./assets/img/avatar-credits.jpg"
+      src="./assets/img/avatar-credits.png"
       alt="avatar-credit"
       class="credits-logo"
     />
@@ -16,5 +16,6 @@
           class="icon-link-external"
       /></span>
     </a>
+    <button class="btn" (click)="logOut()" *ngIf="authService.isLoggedIn()">Logout</button>
   </div>
 </div>
