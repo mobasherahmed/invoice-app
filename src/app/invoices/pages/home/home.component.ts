@@ -44,7 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   setInvoices(invoices: Invoice[]) {
     this.invoices = invoices
-    this.invoicesService.invoiceCounter = this.invoices.length
+    this.invoicesService.invoiceCounter = this.invoices.length;
+    // use set to update the value of the signal
+    this.invoicesService.counter.set(this.invoices.length);   
     this.titleService.setTitle(`Invoices (${this.invoices.length})`)
   }
 

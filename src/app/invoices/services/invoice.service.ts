@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Invoice } from '../interfaces/invoice.interface';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, map, of, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
@@ -12,7 +12,8 @@ export class InvoiceService {
   refreshInvoices$ = new Subject();
   statusCatalog = new BehaviorSubject(['Paid', 'Draft', 'Pending']);
   invoiceCounter = 0;
-  activeFilter : any = null
+  activeFilter : any = null;
+  counter = signal(0);
 
   constructor(private http: HttpClient) {}
 

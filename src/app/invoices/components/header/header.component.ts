@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
   }
 
   get counter() {
-    return this.invoiceService.invoiceCounter;
+    return this.invoiceService.counter();
   }
 
   get openFilter() {
