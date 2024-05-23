@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Va
 import { ToastrService } from 'ngx-toastr';
 import { UIService } from '../../../shared/services/ui.service';
 import { InvoiceService } from '../../services/invoice.service';
-import { CommonModule } from '@angular/common';
+
 import { PaymentTerms } from '../../interfaces/catalog.interface';
 
 @Component({
@@ -11,7 +11,7 @@ import { PaymentTerms } from '../../interfaces/catalog.interface';
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss'],
   standalone: true,
-  imports:[ReactiveFormsModule,FormsModule,CommonModule]
+  imports: [ReactiveFormsModule, FormsModule]
 })
 export class InvoiceFormComponent implements OnInit {
   form: FormGroup;

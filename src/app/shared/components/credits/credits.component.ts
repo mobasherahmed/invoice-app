@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Inject, Output, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../../../auth/services/auth.service';
   templateUrl: './credits.component.html',
   styleUrls: ['./credits.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
 })
 export class CreditsComponent {
   @Output()

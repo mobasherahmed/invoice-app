@@ -1,127 +1,134 @@
-<section class="invoice" *ngIf="invoice">
-  <div class="invoice-back">
-    <button class="go-back" routerLink="/invoices">
-      <img src="./assets/img/icon-arrow-left.svg" alt="go back" />
-      <span>Go back</span>
-    </button>
-  </div>
-
-  <div class="invoice-status-card flex-between theme-animation">
-    <div class="flex-between">
-      <p>Status</p>
-      <span
-        class="inovice-status"
-        [ngClass]="'status-' + invoice.status.toLowerCase()"
-      >
-        {{ invoice.status }}
-      </span>
-    </div>
-    <div class="invoice-actions top">
-      <button class="btn" (click)="handleEdit()" *ngIf="isAdmin">Edit</button>
-      <button class="btn btn-delete" (click)="openModal()" *ngIf="isAdmin">Delete</button>
-      <button
-        class="btn btn-paid"
-        (click)="markAsPaid()"
-        *ngIf="invoice.status.toLowerCase() !== 'paid'"
-      >
-        Mark As Paid
+@if (invoice) {
+  <section class="invoice">
+    <div class="invoice-back">
+      <button class="go-back" routerLink="/invoices">
+        <img src="./assets/img/icon-arrow-left.svg" alt="go back" />
+        <span>Go back</span>
       </button>
     </div>
-  </div>
-
-  <div class="invoice-wrap theme-animation">
-    <div class="invoice-header flex-between">
-      <div class="invoice-header--left">
-        <span>{{ invoice._id | slice: 0:6 | uppercase }}</span>
-        <p>{{ invoice.description }}</p>
+    <div class="invoice-status-card flex-between theme-animation">
+      <div class="flex-between">
+        <p>Status</p>
+        <span
+          class="inovice-status"
+          [ngClass]="'status-' + invoice.status.toLowerCase()"
+          >
+          {{ invoice.status }}
+        </span>
       </div>
-
-      <address class="invoice-header--right">
-        <p>{{ invoice.senderAddress.street }}</p>
-        <p>{{ invoice.senderAddress.city }}</p>
-        <p>{{ invoice.senderAddress.postCode }}</p>
-        <p>{{ invoice.senderAddress.country }}</p>
-      </address>
+      <div class="invoice-actions top">
+        @if (isAdmin) {
+          <button class="btn" (click)="handleEdit()">Edit</button>
+        }
+        @if (isAdmin) {
+          <button class="btn btn-delete" (click)="openModal()">Delete</button>
+        }
+        @if (invoice.status.toLowerCase() !== 'paid') {
+          <button
+            class="btn btn-paid"
+            (click)="markAsPaid()"
+            >
+            Mark As Paid
+          </button>
+        }
+      </div>
     </div>
-
-    <div class="invoice-body flex-between">
-      <div class="date-wrap">
-        <div class="date">
-          <span>Invoice Date</span>
-          <p>{{ invoice.createdAt | date: "dd MMM yyyy" }}</p>
+    <div class="invoice-wrap theme-animation">
+      <div class="invoice-header flex-between">
+        <div class="invoice-header--left">
+          <span>{{ invoice._id | slice: 0:6 | uppercase }}</span>
+          <p>{{ invoice.description }}</p>
         </div>
-        <div class="date">
-          <span>Payment Due</span>
-          <p>{{ invoice.paymentDue | date: "dd MMM yyyy" }}</p>
+        <address class="invoice-header--right">
+          <p>{{ invoice.senderAddress.street }}</p>
+          <p>{{ invoice.senderAddress.city }}</p>
+          <p>{{ invoice.senderAddress.postCode }}</p>
+          <p>{{ invoice.senderAddress.country }}</p>
+        </address>
+      </div>
+      <div class="invoice-body flex-between">
+        <div class="date-wrap">
+          <div class="date">
+            <span>Invoice Date</span>
+            <p>{{ invoice.createdAt | date: "dd MMM yyyy" }}</p>
+          </div>
+          <div class="date">
+            <span>Payment Due</span>
+            <p>{{ invoice.paymentDue | date: "dd MMM yyyy" }}</p>
+          </div>
+        </div>
+        <div class="bill-to">
+          <span>Bill To</span>
+          <h2>{{ invoice.clientName }}</h2>
+          <p>{{ invoice.clientAddress.street }}</p>
+          <p>{{ invoice.clientAddress.city }}</p>
+          <p>{{ invoice.clientAddress.postCode }}</p>
+          <p>{{ invoice.clientAddress.country }}</p>
+        </div>
+        <div class="send-to">
+          <span>Send to</span>
+          <p>{{ invoice.clientEmail }}</p>
         </div>
       </div>
-
-      <div class="bill-to">
-        <span>Bill To</span>
-        <h2>{{ invoice.clientName }}</h2>
-        <p>{{ invoice.clientAddress.street }}</p>
-        <p>{{ invoice.clientAddress.city }}</p>
-        <p>{{ invoice.clientAddress.postCode }}</p>
-        <p>{{ invoice.clientAddress.country }}</p>
+      <div class="invoice-table theme-animation">
+        <table>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th class="text-center">QTY.</th>
+              <th class="text-right">Price</th>
+              <th class="text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of invoice.items; track item) {
+              <tr>
+                <td>{{ item.name }}</td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td class="text-right">${{ item.price }}</td>
+                <td class="text-right">${{ item.total }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
-
-      <div class="send-to">
-        <span>Send to</span>
-        <p>{{ invoice.clientEmail }}</p>
+      <div class="invoice-total flex-between">
+        <span>Amount Due</span>
+        <span class="invoice-total-amout">${{ invoice.total }}</span>
       </div>
     </div>
-
-    <div class="invoice-table theme-animation">
-      <table>
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th class="text-center">QTY.</th>
-            <th class="text-right">Price</th>
-            <th class="text-right">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of invoice.items">
-            <td>{{ item.name }}</td>
-            <td class="text-center">{{ item.quantity }}</td>
-            <td class="text-right">${{ item.price }}</td>
-            <td class="text-right">${{ item.total }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="invoice-actions bottom">
+      @if (isAdmin) {
+        <button class="btn" (click)="handleEdit()">Edit</button>
+      }
+      @if (isAdmin) {
+        <button class="btn btn-delete" (click)="openModal()">Delete</button>
+      }
+      @if (invoice.status.toLowerCase() !== 'paid') {
+        <button
+          class="btn btn-paid"
+          (click)="markAsPaid()"
+          >
+          Mark As Paid
+        </button>
+      }
     </div>
+  </section>
+}
 
-    <div class="invoice-total flex-between">
-      <span>Amount Due</span>
-      <span class="invoice-total-amout">${{ invoice.total }}</span>
+
+@if (modalService.openModal) {
+  <app-modal>
+    <div class="modal-invoice-delete">
+      <h2>Confirm Deletion</h2>
+      <p>
+        Are you sure you want to delete invoice {{ invoice._id | slice: 0:6 | uppercase }}? This action
+        cannot be undone.
+      </p>
+      <div class="invoice-actions">
+        <button class="btn" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-delete" (click)="handleDelete()">Delete</button>
+      </div>
     </div>
-  </div>
-
-  <div class="invoice-actions bottom">
-    <button class="btn" (click)="handleEdit()" *ngIf="isAdmin">Edit</button>
-    <button class="btn btn-delete" (click)="openModal()" *ngIf="isAdmin">Delete</button>
-    <button
-    class="btn btn-paid"
-    (click)="markAsPaid()"
-    *ngIf="invoice.status.toLowerCase() !== 'paid'"
-  >
-    Mark As Paid
-  </button>
-  </div>
-</section>
-
-
-<app-modal *ngIf="modalService.openModal">
-  <div class="modal-invoice-delete">
-    <h2>Confirm Deletion</h2>
-    <p>
-      Are you sure you want to delete invoice {{ invoice._id | slice: 0:6 | uppercase }}? This action
-      cannot be undone.
-    </p>
-    <div class="invoice-actions">
-      <button class="btn" (click)="closeModal()">Cancel</button>
-      <button class="btn btn-delete" (click)="handleDelete()">Delete</button>
-    </div>
-  </div>
-</app-modal>
+  </app-modal>
+}

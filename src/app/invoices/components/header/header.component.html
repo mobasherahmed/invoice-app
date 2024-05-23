@@ -14,22 +14,26 @@
           alt="Icon Arrow"
           class="filter-icon-arrow"
           [class.activeFilter]="openFilter"
-        />
-      </button>
-      <ul (mouseleave)="closeFilter($event)" class="dropdown" *ngIf="openFilter" >
-        <li *ngFor="let filter of filters; let i = index" (click)="toggleFilter(filter.name, i)" >
-          <span class="filter-checkbox" [class.active-filter]="filter.checked" ></span>
-          <span class="filter-text">{{ filter.name }}</span>
-        </li>
-      </ul>
-    </div>
-    <button class="header-btn--new" (click)="toggleForm()">
-      <div class="wrap-icon-plus">
-        <img src="./assets/img/icon-plus.svg" alt="Icon Plus" />
+          />
+        </button>
+        @if (openFilter) {
+          <ul (mouseleave)="closeFilter($event)" class="dropdown" >
+            @for (filter of filters; track filter; let i = $index) {
+              <li (click)="toggleFilter(filter.name, i)" >
+                <span class="filter-checkbox" [class.active-filter]="filter.checked" ></span>
+                <span class="filter-text">{{ filter.name }}</span>
+              </li>
+            }
+          </ul>
+        }
       </div>
-      <span class="header-btn-text">
-        New <span class="header-text-hide">Invoice</span>
-      </span>
-    </button>
-  </div>
-</header>
+      <button class="header-btn--new" (click)="toggleForm()">
+        <div class="wrap-icon-plus">
+          <img src="./assets/img/icon-plus.svg" alt="Icon Plus" />
+        </div>
+        <span class="header-btn-text">
+          New <span class="header-text-hide">Invoice</span>
+        </span>
+      </button>
+    </div>
+  </header>

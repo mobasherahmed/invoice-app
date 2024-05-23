@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Invoice } from '../../interfaces/invoice.interface';
 import { UIService } from '../../../shared/services/ui.service';
 import { InvoiceItemComponent } from '../invoice-item/invoice-item.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
   standalone: true,
-  imports: [InvoiceItemComponent,CommonModule]
+  imports: [InvoiceItemComponent]
 })
 export class InvoiceListComponent implements OnInit {
   @Input() invoices!: Invoice[];

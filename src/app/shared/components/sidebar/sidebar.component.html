@@ -11,7 +11,8 @@
     </button>
   </div>
 </aside>
-<app-credits
-  *ngIf="showCredits"
-  (closeCreditsScreen)="handleCloseCredits($event)"
-></app-credits>
+@if (showCredits) {
+  <app-credits
+    (closeCreditsScreen)="handleCloseCredits($event)"
+  ></app-credits>
+}

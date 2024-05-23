@@ -1,14 +1,14 @@
 import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
 import { UIService } from '../../../shared/services/ui.service';
 import { InvoiceService } from '../../services/invoice.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports:[CommonModule]
+  imports: []
 })
 export class HeaderComponent implements OnInit {
   @Output() filter = new EventEmitter<string | null>();

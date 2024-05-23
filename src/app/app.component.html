@@ -1,11 +1,15 @@
 <div class="container" (click)="uiService.closeFilter($event)">
-  <div class="backdrop" 
-    [class.backdrop-close]="uiService.animationCloseForm" 
-    (click)="uiService.closeForm()" 
-    *ngIf="uiService.openForm">
-  </div>
+  @if (uiService.openForm) {
+    <div class="backdrop"
+      [class.backdrop-close]="uiService.animationCloseForm"
+      (click)="uiService.closeForm()"
+      >
+    </div>
+  }
   <app-sidebar></app-sidebar>
-  <app-invoice-form  *ngIf="openForm" ></app-invoice-form>
+  @if (openForm) {
+    <app-invoice-form  ></app-invoice-form>
+  }
   <main class="invoice-main">
     <router-outlet></router-outlet>
   </main>

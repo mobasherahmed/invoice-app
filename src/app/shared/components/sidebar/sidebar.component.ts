@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { CreditsComponent } from '../credits/credits.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   standalone: true,
-  imports:[CreditsComponent,CommonModule]
+  imports: [CreditsComponent]
 })
 export class SidebarComponent {
   private ICON_SUN = 'icon-sun';

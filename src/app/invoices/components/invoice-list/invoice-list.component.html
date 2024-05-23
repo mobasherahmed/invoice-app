@@ -1,7 +1,8 @@
 <ul class="invoice-list">
-  <app-invoice-item
-    *ngFor="let invoice of invoices; let i = index"
-    [invoice]="invoice"
-    [idx]="i"
-  ></app-invoice-item>
+  @for (invoice of invoices; track invoice; let i = $index) {
+    <app-invoice-item
+      [invoice]="invoice"
+      [idx]="i"
+    ></app-invoice-item>
+  }
 </ul>
